@@ -1,22 +1,13 @@
 steps:
-- name: 'hashicorp/terraform:light'
-  entrypoint: 'sh'
-  args:
-  - '-c'
-  - |
-    terraform init
-    terraform apply -auto-approve
+  # Step 1: Describe SQL instance for verification
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['sql', 'instances', 'describe', 'europe-sql-db']
+    id: 'verify-sql-instance'
 
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: 'gcloud'
-  args:
-  - 'functions'
-  - 'deploy'
-  - 'visitorCounterFunction'
-  - '--region=us-central1'
-  - '--runtime=python311'
-  - '--trigger-http'
-  - '--source=.'
-  - '--entry-point=visitor_counter'
+  # Step 2: Verify Other Resources if Necessary
+  # You can add additional steps here to check other resources or configurations
+  # - name: 'gcr.io/cloud-builders/gcloud'
+  #   args: ['compute', 'instances', 'list', '--filter=location:europe-west1']
 
-timeout: '900s'
+options:
+  logging: CLOUD_LOGGING_ONLY
