@@ -20,12 +20,15 @@ steps:
   args:
   - '-c'
   - |
+    echo "Configuring gcloud..."
+    gcloud config set project genuine-habitat-439408-a1
+    gcloud config set functions/region us-central1
     echo "Deploying Cloud Function..."
     gcloud functions deploy visitorCounterFunction \
       --region=us-central1 \
       --runtime=python311 \
       --trigger-http \
-      --source=. \
+      --source=/workspace \
       --entry-point=visitor_counter
 
 options:
