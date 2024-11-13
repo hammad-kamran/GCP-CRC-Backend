@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+env/
+venv/
+ENV/
+*.env
+
+# Terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.*
+.terraform.lock.hcl
+*.tfvars
+
+# Logs and temp files
+*.log
+*.tmp
