@@ -19,4 +19,7 @@ steps:
   - '--source=.'
   - '--entry-point=visitor_counter'
 
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 timeout: '900s'
